@@ -1,4 +1,4 @@
-import { BaseCommand } from './BaseCommand.ts';
+import { BaseCommand } from './Commands.ts';
 
 export 
 class NukeCommand extends BaseCommand {

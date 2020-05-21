@@ -1,12 +1,6 @@
 import { Command } from './Enums/Command.ts';
 import { ExecutableCommand } from './Interfaces/ExecuteableCommand.ts';
-import { DeleteCommand } from './Commands/DeleteCommand.ts';
-import { ExistsCommand } from './Commands/ExistsCommand.ts';
-import { FindCommand } from './Commands/FindCommand.ts';
-import { GetCommand } from './Commands/GetCommand.ts';
-import { KeyCommand } from './Commands/KeyCommand.ts';
-import { NukeCommand } from './Commands/NukeCommand.ts';
-import { SetCommand } from './Commands/SetCommand.ts';
+import { DeleteCommand, ExistsCommand, FindCommand, GetCommand, KeyCommand, NukeCommand, SetCommand } from './Commands/Commands.ts';
 
 interface IQueryConstructProps {
     query: string;
