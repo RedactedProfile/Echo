@@ -7,6 +7,9 @@ export class NukeCommand extends BaseCommand {
   }
   execute(): any {
     console.log("Nuking this place to glass");
+
+    this.storage_engine.flush();
+
     this.out("Nuked this place to glass");
   }
 }

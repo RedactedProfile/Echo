@@ -1,3 +1,4 @@
+import { StandardStorage } from './../storage.ts';
 import { BaseCommand } from "./Commands.ts";
 
 export class SetCommand extends BaseCommand {
@@ -26,7 +27,7 @@ export class SetCommand extends BaseCommand {
       }
     }
 
-    this.storage_engine.add(props);
+    StandardStorage.add(props);
 
     this.out("Success");
   }

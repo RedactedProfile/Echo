@@ -1,7 +1,7 @@
 scripts:
   start: 
     cmd: .\echo.ts 
-    log: debug 
+    # log: debug 
     lock: lock.json 
     allow: 
       - net 

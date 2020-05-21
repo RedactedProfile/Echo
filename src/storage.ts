@@ -27,22 +27,65 @@ export class KeyObject {
   }
 }
 
-interface IKeyProps {
+
+export class Storage {
+  private static instance: Storage;
+
+  private _data: any = {};
+
+  get data():any {
+    return this._data;
+  }
+
+  private constructor() {
+    this.flush(); // initialize data table
+  }
+
+  public flush() {
+    this._data = {
+      standard: {},
+    };
+  }
+
+  public static getInstance(): Storage {
+    if (!Storage.instance) {
+      Storage.instance = new Storage();
+    }
+
+    return Storage.instance;
+  }
+}
+
+
+
+export interface IKeyProps {
   key: string;
   val: string;
   ttl?: number;
 }
 
-export class Storage {
-  private static instance: Storage;
+export class StandardStorage {
+  private static instance: StandardStorage;
 
-  private data: any = {
-    standard: {},
-  };
+  private _storage:Storage;
 
-  private constructor() {}
+  get storage():Storage {
+    return this._storage;
+  }
 
-  public add(props: IKeyProps) {
+  constructor() {
+    this._storage = Storage.getInstance();
+  }
+
+  public static getInstance(): StandardStorage {
+    if (!StandardStorage.instance) {
+      StandardStorage.instance = new StandardStorage();
+    }
+
+    return StandardStorage.instance;
+  }
+
+  public static add(props: IKeyProps) {
     const new_key = new KeyObject();
     new_key.key = props.key;
     new_key.value = props.val;
@@ -52,17 +95,7 @@ export class Storage {
 
     const storage_key = md5(new_key.key);
 
-    this.data.standard[storage_key] = new_key;
-
-    console.log(this.data);
-  }
-
-  public static getInstance(): Storage {
-    if (!Storage.instance) {
-      console.log("Creating new instance of StorageEngine");
-      Storage.instance = new Storage();
-    }
-
-    return Storage.instance;
+    // this.storage.data.standard[storage_key] = new_key;
+    StandardStorage.getInstance().storage.data.standard[storage_key] = new_key;
   }
 }
