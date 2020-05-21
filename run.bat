@@ -1,0 +1,1 @@
+deno run --allow-net --allow-env --lock=lock.json --lock-write .\echo.ts
