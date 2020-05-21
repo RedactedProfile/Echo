@@ -1,4 +1,3 @@
-export 
-type ExecutableCommand = {  
-    execute():any;
-}
+export type ExecutableCommand = {
+  execute(): any;
+};

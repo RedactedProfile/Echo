@@ -16,7 +16,6 @@ interface IQueryConstructProps {
 }
 
 export class Query {
-
   original_query!: string;
   original_pieces!: Array<string>;
   conn!: Deno.Conn;
