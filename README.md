@@ -67,6 +67,12 @@ CHK mykey
 SET mykey "keyvalue"
 ```
 
+#### Create / Update Key with a TTL
+
+```
+SET mykey "keyvalue" 1200
+```
+
 #### Set / Update an existing key's TTL (Time to Live) 
 
 ```
