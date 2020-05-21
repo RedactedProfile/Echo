@@ -113,3 +113,21 @@ NUK
 
 ## Contributing
 
+### Dependencies 
+- [Deno](https://deno.land/) 
+
+### Running 
+
+Though optional, This project uses the [Velociraptor](https://deno.land/x/velociraptor) task runner for common tasks, to install
+
+```
+$ deno install --allow-read --allow-env --allow-run -n vr https://deno.land/x/velociraptor/cli.ts
+```
+
+To run the project
+
+```
+$ vr start
+```
+
+### TODO
