@@ -1,131 +1,17 @@
+import { Command } from './Enums/Command.ts';
+import { ExecutableCommand } from './Interfaces/ExecuteableCommand.ts';
+import { DeleteCommand } from './Commands/DeleteCommand.ts';
+import { ExistsCommand } from './Commands/ExistsCommand.ts';
+import { FindCommand } from './Commands/FindCommand.ts';
+import { GetCommand } from './Commands/GetCommand.ts';
+import { KeyCommand } from './Commands/KeyCommand.ts';
+import { NukeCommand } from './Commands/NukeCommand.ts';
+import { SetCommand } from './Commands/SetCommand.ts';
 
-const encoder = new TextEncoder();
-const decoder = new TextDecoder();
-
-export 
-enum Command {
-    CHK,  // Exists / Checks
-    GET,  // Retrieve / Get value
-    SET,  // Set / Create / Update
-    DEL,  // Delete / Remove
-    TTL,  // Time to Live,
-    NUK,  // Flushes / Nukes all Keys,
-    KEY,  // Search / Find Keys
-    FND,  // Search / Find Values
-};
-
-export 
 interface IQueryConstructProps {
     query: string;
     connection: Deno.Conn;
 };
-
-export 
-type ExecutableCommand = {  
-    execute():any;
-}
-
-export 
-class BaseCommand implements ExecutableCommand {
-
-    constructor(public connection:Deno.Conn) {
-
-    }
-
-    async out(message:string) {
-        await this.connection.write(encoder.encode(`${message}\r\n`))
-    }
-
-    sanitize_value(_val:string) {
-        // function that strips off surrounding double quotes and removes any slashes found within
-        return _val;
-    }
-
-    execute():any {
-        console.log("Not Implemented");
-    }
-}
-
-export 
-class NukeCommand extends BaseCommand {
-    // Nuke is a command that doesn't take any arguments, no constructor is needed (at this time)
-    constructor(connection:Deno.Conn) {
-        super(connection)
-    }
-    execute():any {
-        console.log("Nuking this place to glass");
-        this.out("Nuked this place to glass");
-    }
-}
-
-export 
-class KeyCommand extends BaseCommand {
-    constructor(private query:string,connection:Deno.Conn) {
-        super(connection);
-    }
-
-    execute():any {
-        const _val = this.sanitize_value(this.query);
-        console.log("Looking for key names with this fuzzy match", _val);
-    }
-}
-
-export 
-class FindCommand extends BaseCommand {
-    constructor(private query:string, connection:Deno.Conn) {
-        super(connection);
-    }
-
-    execute():any {
-        const _val = this.sanitize_value(this.query);
-        console.log("Looking for keys with this value somewhere", _val);
-    }
-}
-
-export 
-class SetCommand extends BaseCommand {
-    constructor(private key:string, private value:string, private extras:Array<string>, connection:Deno.Conn) {
-        super(connection);
-    }
-
-    execute():any {
-        const _val = this.sanitize_value(this.value);
-        console.log("Setting key:", this.key, "with value:", _val, "and maybe", this.extras);
-    }
-}
-
-export 
-class GetCommand extends BaseCommand {
-    constructor(private key:string, connection:Deno.Conn) {
-        super(connection);
-    }
-
-    execute():any {
-        console.log("Retriving:", this.key, "'s value if any");
-    }
-}
-
-export 
-class ExistsCommand extends BaseCommand {
-    constructor(private key:string, connection:Deno.Conn) {
-        super(connection);
-    }
-
-    execute():any {
-        console.log("Determining if ", this.key, " exists");
-    }
-}
-
-export 
-class DeleteCommand extends BaseCommand {
-    constructor(private key:string, connection:Deno.Conn) {
-        super(connection);
-    }
-
-    execute():any {
-        console.log("Deleting key", this.key);
-    }
-}
 
 export 
 class Query {

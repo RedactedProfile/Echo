@@ -1,5 +1,5 @@
 import { assertEquals } from "./deps.ts";
-import { Query } from './query.ts';
+import { Query } from './src/query.ts';
 
 const env = Deno.env.toObject();
 const PORT = env.PORT || 8200;
@@ -46,7 +46,7 @@ async function handle_connection(connection: Deno.Conn) {
                         query: query,
                         connection: current_connection
                     });
-                    
+
                     _query.handle_query();
 
                 }
