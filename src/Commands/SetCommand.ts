@@ -8,6 +8,17 @@ class SetCommand extends BaseCommand {
 
     execute():any {
         const _val = this.sanitize_value(this.value);
-        console.log("Setting key:", this.key, "with value:", _val, "and maybe", this.extras);
+        // console.log("Setting key:", this.key, "with value:", _val, "and maybe", this.extras);
+        let props:any = {key: this.key, val: this.value};
+        if(this.extras && this.extras.length > 0) {
+            // get the TTL if provided
+            const ttl = this.extras.shift();
+            if(ttl) {
+                props.ttl = parseInt(ttl);
+            }
+        }
+        this.storage_engine.add(props);
+
+        this.out("Success");
     }
 }

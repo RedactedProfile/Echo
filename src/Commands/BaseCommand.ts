@@ -1,13 +1,18 @@
 import { ExecutableCommand } from '../Interfaces/ExecuteableCommand.ts';
+import { Storage } from '../storage.ts';
 
 export 
 class BaseCommand implements ExecutableCommand {
 
     private encoder = new TextEncoder();
+    public storage_engine:Storage;
 
-    constructor(public connection:Deno.Conn) {
 
-    }
+    constructor(
+        public connection:Deno.Conn
+        ) { 
+            this.storage_engine = Storage.getInstance();
+        }
 
     async out(message:string) {
         await this.connection.write(this.encoder.encode(`${message}\r\n`))

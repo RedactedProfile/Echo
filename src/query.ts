@@ -99,7 +99,7 @@ class Query {
 
     handle_query() {
         
-        console.log(this);
+        // console.log(this);
 
         let cmd:ExecutableCommand;
 

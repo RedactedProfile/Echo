@@ -1,5 +1,6 @@
 import { assertEquals } from "./deps.ts";
 import { Query } from './src/query.ts';
+import { Storage } from './src/storage.ts';
 
 const env = Deno.env.toObject();
 const PORT = env.PORT || 8200;
@@ -11,6 +12,11 @@ const decoder = new TextDecoder();
 const connections: Deno.Conn[] = [];
 
 const binaryListener = Deno.listen({port: 8200});
+
+console.log("Initializing Clean Storage");
+Storage.getInstance();
+
+
 console.log("Listening on 8200");
 
 for await (const conn of binaryListener) {
