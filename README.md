@@ -24,7 +24,42 @@ Clone the source code, build yourself
 
 ---
 
+## Connecting / Interacting 
+
+### CLI
+
+```
+# Using netcat
+nc host:8200
+```
+
+### Serverside
+
+```
+Coming soon!
+```
+
+### Browser Interface
+
+```
+http://host:8201
+```
+
+### Via REST API
+
+```
+http://host:8201/api
+```
+
+---
+
 ## Usage
+
+#### Check if a key exists
+
+```
+CHK mykey
+```
 
 #### Create / Update Key 
 
@@ -35,19 +70,37 @@ SET mykey "keyvalue"
 #### Set / Update an existing key's TTL (Time to Live) 
 
 ```
-EXP mykey 1600
+TTL mykey 1600
 ```
 
-#### Check if a key exists
+#### Get / Retrieve Key value (if exists)
 
 ```
-EXT mykey
+GET mykey
 ```
 
 #### Delete / Remove a key 
 
 ```
 DEL mykey
+```
+
+#### Search for a key by name
+
+```
+KEY "search value"
+```
+
+#### Search for a key by value 
+
+```
+FND "search value"
+```
+
+#### Nuke all keys 
+
+```
+NUK 
 ```
 
 ---
