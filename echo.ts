@@ -42,24 +42,15 @@ async function handle_connection(connection: Deno.Conn) {
                     console.log("Query received:", query);
                     console.log(query);
 
-                    const QueryObject = new Query({query: query});
+                    const _query = new Query({
+                        query: query,
+                        connection: current_connection
+                    });
+                    
+                    _query.handle_query();
 
-                    const parsed_query = parse_query(query);
-                    // handle_query(parsed_query, current_connection); 
                 }
             }
         }
     }
 }
-
-function parse_query(query: string) {
-
-}
-
-// function handle_query(parsed_query, connection) {
-//     /*
-//     on quit
-//     await current_connection.write(encoder.encode("Bye."));
-//     current_connection.close();
-//     */
-// }

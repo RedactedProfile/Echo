@@ -28,7 +28,7 @@ type ExecutableCommand = {
 export 
 class BaseCommand implements ExecutableCommand {
 
-    constructor(protected connection:Deno.Conn) {
+    constructor(public connection:Deno.Conn) {
 
     }
 
@@ -141,19 +141,13 @@ class Query {
     original_query!: string;
     original_pieces!:Array<string>;
     conn!:Deno.Conn;
-    
-    // command!:Command;
-    // key!:string;
-    // value!:string;
-    // extras!:[string];
 
-    constructor(
-        props:IQueryConstructProps, 
-        private command:Command,
-        private key:string, 
-        private value:string,
-        private extras:Array<string> 
-    ) {
+    private command!:Command;
+    private key!:string;
+    private value!:string;
+    private extras!:Array<string>;
+
+    constructor(props:IQueryConstructProps) {
         this.conn = props.connection;
         
         if(props.query) {
@@ -187,7 +181,7 @@ class Query {
         if(this.command === Command.NUK) {
             if(q_pieces.length) {
                 this.extras = q_pieces; }
-            return this.handle_query();
+            return;
         }
 
         // STEP 3: Determine if this is a search function, which is special in that it doesn't take a key, but instead a search string
@@ -201,7 +195,7 @@ class Query {
             if(q_pieces.length) {
                 this.extras = q_pieces; }
 
-            return this.handle_query();
+            return;
         }
 
         // STEP 4: The second slot aside from above all determine the key to be the second slot
@@ -220,7 +214,7 @@ class Query {
         if(q_pieces.length) {
             this.extras = q_pieces; }
 
-        return this.handle_query();
+        return;
     }
 
     handle_query() {
@@ -228,6 +222,7 @@ class Query {
         console.log(this);
 
         let cmd:ExecutableCommand;
+
         switch(this.command) {
             case Command.CHK:
                 cmd = new ExistsCommand(this.key, this.conn);
