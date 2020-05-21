@@ -1,1 +1,0 @@
-deno bundle .\echo.ts .\echo.bundle.js
