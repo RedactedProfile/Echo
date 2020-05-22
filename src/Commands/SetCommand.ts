@@ -22,7 +22,8 @@ export class SetCommand extends BaseCommand {
       if (s_ttl) {
         const n_ttl = parseInt(s_ttl);
         if (n_ttl) {
-          props.ttl = n_ttl;
+          // props.ttl = n_ttl;
+          // execute TTL subroutine
         }
       }
     }

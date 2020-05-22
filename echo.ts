@@ -35,16 +35,13 @@ async function handle_connection(connection: Deno.Conn) {
       connections.splice(index, 1);
       break;
     } else {
-      // message received
-
       for (const current_connection of connections) {
         if (current_connection === connection) {
           console.log("message received");
           let message = buffer.subarray(0, count);
           let query = decoder.decode(message).toString().trim();
 
-          console.log("Query received:", query);
-          console.log(query);
+          // console.log("Query received:", query);
 
           const _query = new Query({
             query: query,
