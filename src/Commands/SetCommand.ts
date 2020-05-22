@@ -1,5 +1,6 @@
 import { StandardStorage } from './../storage.ts';
 import { BaseCommand } from "./Commands.ts";
+import { moment } from '../../deps.ts';
 
 export class SetCommand extends BaseCommand {
   constructor(
@@ -22,8 +23,8 @@ export class SetCommand extends BaseCommand {
       if (s_ttl) {
         const n_ttl = parseInt(s_ttl);
         if (n_ttl) {
-          // props.ttl = n_ttl;
-          // execute TTL subroutine
+          props.ttl = moment().add(n_ttl, 'seconds').format();
+          // @todo execute TTL subroutine
         }
       }
     }
