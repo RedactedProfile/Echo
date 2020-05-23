@@ -62,12 +62,15 @@ CHK mykey
 ```
 
 #### Create / Update Key 
+The value doesn't have to be wrapped in quotes, but if your value contains any spaces it will need them
 
 ```
-SET mykey "keyvalue"
+SET mykey keyvalue
+SET mykey "key value"
 ```
 
 #### Create / Update Key with a TTL
+This is a convenience feature to negate the need for sending a follow up command
 
 ```
 SET mykey "keyvalue" 1200
@@ -91,10 +94,18 @@ GET mykey
 DEL mykey
 ```
 
-#### Search for a key by name
+#### Search for a key by name using greedy wildcards.
+Returns a JSON string array of discovered key names 
 
 ```
-KEY "search value"
+# Prefix search
+KEY mykey*
+
+# Suffix Search
+KEY *mykey
+
+# Fuzzy Search
+KEY *mykey*
 ```
 
 #### Search for a key by value 
@@ -104,6 +115,7 @@ FND "search value"
 ```
 
 #### Nuke all keys 
+This resets all tables to their default state
 
 ```
 NUK 
