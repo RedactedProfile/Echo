@@ -1,4 +1,8 @@
-import { md5 } from "../deps.ts";
+import { md5, moment } from "../deps.ts";
+
+interface IKeyValidProps {
+  now?: any; // moment instance
+}
 
 export class KeyObject {
   private _key: string = "";
@@ -24,6 +28,14 @@ export class KeyObject {
   }
   set ttl(val: number) {
     this._ttl = val;
+  }
+
+  public is_valid(props: IKeyValidProps = {}) {
+    // if we dont have to instantiate a new moment instance, then we shouldn't
+    if(!props.now) {
+      props.now = moment();
+    }
+    return this.ttl === 0 || (this.ttl && props.now.isBefore(this.ttl));
   }
 }
 
@@ -97,5 +109,10 @@ export class StandardStorage {
 
     // this.storage.data.standard[storage_key] = new_key;
     StandardStorage.getInstance().storage.data.standard[storage_key] = new_key;
+  }
+
+  public static retrieve(key:string) {
+    key = md5(key);
+    return StandardStorage.getInstance().storage.data.standard[key];
   }
 }
