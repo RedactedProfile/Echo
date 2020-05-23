@@ -115,4 +115,10 @@ export class StandardStorage {
     key = md5(key);
     return StandardStorage.getInstance().storage.data.standard[key];
   }
+
+  public static delete(key:string) {
+    key = md5(key);
+    delete StandardStorage.getInstance().storage.data.standard[key];
+    return;
+  }
 }
