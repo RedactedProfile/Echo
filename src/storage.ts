@@ -1,4 +1,5 @@
 import { md5, moment } from "../deps.ts";
+import { DeleteCommand } from "./Commands/Commands.ts";
 
 interface IKeyValidProps {
   now?: any; // moment instance
@@ -35,7 +36,13 @@ export class KeyObject {
     if(!props.now) {
       props.now = moment();
     }
-    return this.ttl === 0 || (this.ttl && props.now.isBefore(this.ttl));
+    const _valid = this.ttl === 0 || (this.ttl && props.now.isBefore(this.ttl));
+
+    if(!_valid) { 
+      StandardStorage.delete(this.key);
+    }
+
+    return _valid;
   }
 }
 
