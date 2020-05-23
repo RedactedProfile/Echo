@@ -8,7 +8,7 @@ export class KeyCommand extends BaseCommand {
   }
 
   execute(): any {
-    const _val = this.sanitize_value(this.query);
+    let _val = this.sanitize_value(this.query);
 
     const _out:string[] = [];
     const now = moment();
@@ -22,10 +22,20 @@ export class KeyCommand extends BaseCommand {
         if(!do_search) {
           determined = true;
         } else {
-          if(_val.charAt(0) === '*') {
-
-          } else if(_val.charAt(_val.length) === '*') {
-            
+          if (_val.charAt(0) === '*' && _val.charAt(_val.length - 1) === '*') {
+            determined = element.key.indexOf(_val.replace(/\*/g, '')) >= 0;
+          } else if(_val.charAt(0) === '*') {
+            if(_val.length === 1) {
+              determined = true;
+            } else {
+              // suffix search
+              const q = _val.replace('*', '');
+              const pos = element.key.indexOf(q);
+              determined = (pos >= 1) && ( element.key.split('').reverse().join('').indexOf(q.split('').reverse().join('')) === 0 );
+            }
+          } else if(_val.charAt(_val.length - 1) === '*') {
+            // prefix search
+            determined = element.key.indexOf(_val.replace('*', '')) === 0;
           } else {
             determined = true;
           }
@@ -39,6 +49,5 @@ export class KeyCommand extends BaseCommand {
 
     this.out(JSON.stringify(_out));
 
-    console.log("Looking for key names with this fuzzy match", _val);
   }
 }
