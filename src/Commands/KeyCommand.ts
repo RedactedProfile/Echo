@@ -9,6 +9,10 @@ export class KeyCommand extends BaseCommand {
 
   execute(): any {
     let _val = this.sanitize_value(this.query);
+    if(!_val) {
+      this.out("Error: no query provided");
+      return;
+    }
 
     const _out:string[] = [];
     const now = moment();

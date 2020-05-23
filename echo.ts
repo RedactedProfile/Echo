@@ -42,13 +42,16 @@ async function handle_connection(connection: Deno.Conn) {
           let query = decoder.decode(message).toString().trim();
 
           // console.log("Query received:", query);
-
-          const _query = new Query({
-            query: query,
-            connection: current_connection,
-          });
-
-          _query.handle_query();
+          try {
+            const _query = new Query({
+              query: query,
+              connection: current_connection,
+            });
+  
+            _query.handle_query();
+          } catch(err) {
+            await current_connection.write(encoder.encode(`${err}\r\n`));
+          }
         }
       }
     }
