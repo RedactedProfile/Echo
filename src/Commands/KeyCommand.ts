@@ -1,4 +1,4 @@
-import { StandardStorage, IKeyProps } from './../storage.ts';
+import { StandardStorage, IKeyProps, KeyObject } from './../storage.ts';
 import { BaseCommand } from "./Commands.ts";
 import { moment } from '../../deps.ts';
 
@@ -16,8 +16,7 @@ export class KeyCommand extends BaseCommand {
     // get all keys
     Object.values(StandardStorage.getInstance().storage.data.standard)
     .forEach((element:any) => {
-         // is this a valid entry determined by TTL
-      if(element.ttl === 0 || (element.ttl && now.isBefore(element.ttl))) {
+      if(element.is_valid({now: now})) {
         // determine if this key matches the search inquiry (if provided)
         let determined = false;
         if(!do_search) {
