@@ -16,6 +16,7 @@ export class KeyCommand extends BaseCommand {
     // get all keys
     Object.values(StandardStorage.getInstance().storage.data.standard)
     .forEach((element:any) => {
+         // is this a valid entry determined by TTL
       if(element.ttl === 0 || (element.ttl && now.isBefore(element.ttl))) {
         // determine if this key matches the search inquiry (if provided)
         let determined = false;
@@ -23,6 +24,7 @@ export class KeyCommand extends BaseCommand {
           determined = true;
         } else {
           if (_val.charAt(0) === '*' && _val.charAt(_val.length - 1) === '*') {
+                         // asking if this string is anywhere
             determined = element.key.indexOf(_val.replace(/\*/g, '')) >= 0;
           } else if(_val.charAt(0) === '*') {
             if(_val.length === 1) {
@@ -30,11 +32,12 @@ export class KeyCommand extends BaseCommand {
             } else {
               // suffix search
               const q = _val.replace('*', '');
-              const pos = element.key.indexOf(q);
-              determined = (pos >= 1) && ( element.key.split('').reverse().join('').indexOf(q.split('').reverse().join('')) === 0 );
+                           // reverse the strings and match at position 0
+              determined = element.key.split('').reverse().join('').indexOf(q.split('').reverse().join('')) === 0;
             }
           } else if(_val.charAt(_val.length - 1) === '*') {
             // prefix search
+                         // basic match at position 0
             determined = element.key.indexOf(_val.replace('*', '')) === 0;
           } else {
             determined = true;
@@ -48,6 +51,5 @@ export class KeyCommand extends BaseCommand {
     });
 
     this.out(JSON.stringify(_out));
-
   }
 }
