@@ -12,11 +12,28 @@ export class KeyCommand extends BaseCommand {
 
     const _out:string[] = [];
     const now = moment();
+    const do_search = _val.indexOf('*') >= 0;
     // get all keys
     Object.values(StandardStorage.getInstance().storage.data.standard)
     .forEach((element:any) => {
       if(element.ttl === 0 || (element.ttl && now.isBefore(element.ttl))) {
-        _out.push(element.key);
+        // determine if this key matches the search inquiry (if provided)
+        let determined = false;
+        if(!do_search) {
+          determined = true;
+        } else {
+          if(_val.charAt(0) === '*') {
+
+          } else if(_val.charAt(_val.length) === '*') {
+            
+          } else {
+            determined = true;
+          }
+        }
+
+        if(determined) {
+          _out.push(element.key);
+        }
       }
     });
 
