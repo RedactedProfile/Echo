@@ -39,6 +39,7 @@ export class KeyObject {
     const _valid = this.ttl === 0 || (this.ttl && props.now.isBefore(this.ttl));
 
     if(!_valid) { 
+      console.log(`KEYEXPIRE: ${this.key} expired, deleting`);
       StandardStorage.delete(this.key);
     }
 
