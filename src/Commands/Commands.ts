@@ -6,3 +6,4 @@ export { GetCommand } from "./GetCommand.ts";
 export { KeyCommand } from "./KeyCommand.ts";
 export { NukeCommand } from "./NukeCommand.ts";
 export { SetCommand } from "./SetCommand.ts";
+export { ExpireCommand } from "./ExpireCommand.ts";

@@ -8,6 +8,7 @@ import {
   KeyCommand,
   NukeCommand,
   SetCommand,
+  ExpireCommand,
 } from "./Commands/Commands.ts";
 
 interface IQueryConstructProps {
@@ -129,6 +130,9 @@ export class Query {
         break;
       case Command.DEL:
         cmd = new DeleteCommand(this.key, this.conn);
+        break;
+      case Command.TTL:
+        cmd = new ExpireCommand(this.key, this.value, this.conn);
         break;
       default:
         throw new Error("Unregistered Command");
