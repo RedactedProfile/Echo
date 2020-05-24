@@ -111,25 +111,25 @@ export class Query {
 
     switch (this.command) {
       case Command.CHK:
-        cmd = new ExistsCommand(this.key, this.conn);
+        cmd = new ExistsCommand({key: this.key, connection: this.conn});
         break;
       case Command.GET:
-        cmd = new GetCommand(this.key, this.conn);
+        cmd = new GetCommand({key: this.key, connection: this.conn});
         break;
       case Command.SET:
-        cmd = new SetCommand(this.key, this.value, this.extras, this.conn);
+        cmd = new SetCommand({key: this.key, value: this.value, extras: this.extras, connection: this.conn});
         break;
       case Command.NUK:
-        cmd = new NukeCommand(this.conn);
+        cmd = new NukeCommand({connection: this.conn});
         break;
       case Command.KEY:
-        cmd = new KeyCommand(this.value, this.conn);
+        cmd = new KeyCommand({query: this.value, connection: this.conn});
         break;
       case Command.FND:
-        cmd = new FindCommand(this.value, this.conn);
+        cmd = new FindCommand({query: this.value, connection: this.conn});
         break;
       case Command.DEL:
-        cmd = new DeleteCommand(this.key, this.conn);
+        cmd = new DeleteCommand({key: this.key, connection: this.conn});
         break;
       case Command.TTL:
         cmd = new ExpireCommand({key: this.key, ttl: this.value, connection: this.conn});

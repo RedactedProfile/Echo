@@ -1,14 +1,23 @@
-import { StandardStorage, IKeyProps, KeyObject } from './../storage.ts';
+import { StandardStorage, KeyObject } from './../storage.ts';
 import { BaseCommand } from "./Commands.ts";
 import { moment } from '../../deps.ts';
 
+interface IKeyProps {
+  query: string;
+  connection: Deno.Conn;
+}
+
 export class KeyCommand extends BaseCommand {
-  constructor(private query: string, connection: Deno.Conn) {
-    super(connection);
+
+  private properties: IKeyProps;
+
+  constructor(props:IKeyProps) {
+    super(props.connection);
+    this.properties = props;
   }
 
   execute(): any {
-    let _val = this.sanitize_value(this.query);
+    let _val = this.sanitize_value(this.properties.query);
 
     const _out:string[] = [];
     const now = moment();

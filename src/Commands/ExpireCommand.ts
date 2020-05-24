@@ -23,7 +23,7 @@ export class ExpireCommand extends BaseCommand {
     const _val:KeyObject = StandardStorage.retrieve(this.properties.key);
     if(_val && _val.is_valid()) {
       if(this.properties.ttl) {
-        const subcmd = new SetCommand(_val.key, _val.value, [this.properties.ttl], this.properties.connection)
+        const subcmd = new SetCommand({key: _val.key, value: _val.value, extras: [this.properties.ttl], connection: this.properties.connection})
                            .execute();
       } else {
         // Difference in seconds
