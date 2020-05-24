@@ -1,6 +1,7 @@
 version: '3'
 services: 
   echo:
+    container_name: "echo"
     build: 
       context: .
     restart: always 
