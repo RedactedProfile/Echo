@@ -14,7 +14,10 @@ Download the binary from apt, choco, etc
 
 #### Docker 
 
-Docker pull instruction here 
+```
+# Unfortunately, thanks to https://github.community/t5/GitHub-Actions/docker-pull-from-public-GitHub-Package-Registry-fail-with-quot/m-p/32888#M1294 you need to supply basic auth :|  we'll likely be publishing to Dockerhub in response until GitHub figures this out
+docker run -e MAX_CONNECTIONS=200 -p 8200:8200 docker.pkg.github.com/redactedprofile/echo/echo:latest 
+```
 
 #### Download
 

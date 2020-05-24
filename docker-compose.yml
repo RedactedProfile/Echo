@@ -4,7 +4,8 @@ services:
     container_name: "echo"
     build: 
       context: .
-    restart: always 
+    restart: always
+    network_mode: bridge 
     environment: 
       PORT: 8200
       HOST: 0.0.0.0
