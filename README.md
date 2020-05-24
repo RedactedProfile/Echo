@@ -1,5 +1,7 @@
 # Echo 
 
+![CD](https://github.com/RedactedProfile/Echo/workflows/CD/badge.svg?branch=master)  
+
 An in-memory cache datastore written with Deno.
 
 ---
