@@ -132,7 +132,7 @@ export class Query {
         cmd = new DeleteCommand(this.key, this.conn);
         break;
       case Command.TTL:
-        cmd = new ExpireCommand(this.key, this.value, this.conn);
+        cmd = new ExpireCommand({key: this.key, ttl: this.value, connection: this.conn});
         break;
       default:
         throw new Error("Unregistered Command");
