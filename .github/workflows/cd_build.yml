@@ -28,5 +28,5 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
-        repository: RedactedProfile/echo/echo
+        repository: redactedprofile/echo/echo
         tag_with_ref: true
