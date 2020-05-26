@@ -4,28 +4,33 @@
 
 An in-memory cache datastore written with Deno.
 
+## Disclaimer
+
+This is currently alpha software, and definitely not tested in a production sense.  The road to Beta public release isn't far off, make sure to check out https://github.com/RedactedProfile/Echo and watch for the official beta. 
+
 ---
 
 ## Installing 
 
 #### Package Manager
 
+WIP 
 Download the binary from apt, choco, etc
 
 #### Docker 
 
 ```
-# Unfortunately, thanks to https://github.community/t5/GitHub-Actions/docker-pull-from-public-GitHub-Package-Registry-fail-with-quot/m-p/32888#M1294 you need to supply basic auth :|  we'll likely be publishing to Dockerhub in response until GitHub figures this out
-docker run -e MAX_CONNECTIONS=200 -p 8200:8200 docker.pkg.github.com/redactedprofile/echo/echo:latest 
+docker run -e MAX_CONNECTIONS=200 -p 8200:8200 redactedprofile/echo:latest 
 ```
 
 #### Download
 
+WIP 
 Attain binary from releases page, manual installation
 
 #### Build from Source 
 
-Clone the source code, build yourself 
+WIP
 
 ---
 
@@ -145,6 +150,12 @@ To run the project
 
 ```
 $ vr start
+```
+
+Without Velocirator
+
+```
+deno run --allow-env --allow-net .\echo.ts 
 ```
 
 ### TODO
