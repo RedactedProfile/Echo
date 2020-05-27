@@ -6,31 +6,17 @@ An in-memory cache datastore written with Deno.
 
 ## Disclaimer
 
-This is currently alpha software, and definitely not tested in a production sense.  The road to Beta public release isn't far off, make sure to check out https://github.com/RedactedProfile/Echo and watch for the official beta. 
+This is currently beta software, and definitely not tested in a production sense.  The road to Release Candidate isn't far off but it does require testing and benchmarking. Make sure to check out https://github.com/RedactedProfile/Echo and watch for the progress. 
 
 ---
 
 ## Installing 
-
-#### Package Manager
-
-WIP 
-Download the binary from apt, choco, etc
 
 #### Docker 
 
 ```
 docker run -e MAX_CONNECTIONS=200 -p 8200:8200 redactedprofile/echo:latest 
 ```
-
-#### Download
-
-WIP 
-Attain binary from releases page, manual installation
-
-#### Build from Source 
-
-WIP
 
 ---
 
