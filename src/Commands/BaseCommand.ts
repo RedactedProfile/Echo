@@ -17,7 +17,16 @@ export class BaseCommand implements ExecutableCommand {
 
   sanitize_value(_val: string) {
     // function that strips off surrounding double quotes and removes any slashes found within
-    return _val.trim();
+    _val = _val.trim();
+    
+    if(_val.charAt(0) === '"') {
+      let tmp = _val.split('');
+      tmp.shift();
+      tmp.pop();
+      _val = tmp.join('');
+    } 
+
+    return _val;
   }
 
   execute(): any {
