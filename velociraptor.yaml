@@ -7,4 +7,4 @@ scripts:
       - env 
   bundle: deno bundle echo.ts warp\echo.bundle.js
   start-fresh: deno run --allow-net --allow-env --lock=lock.json --lock-write --reload .\echo.ts
-  compile-windows: warp-packer --arch windows-x64 --input_dir .\warp\ --exec warp-launcher.cmd --output echo.exe
+  compile-windows: warp-packer --arch windows-x64 --input_dir .\warp\ --exec warp-launcher.cmd --output ./dist/echo.exe
